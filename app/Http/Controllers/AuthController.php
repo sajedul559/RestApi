@@ -27,7 +27,8 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (! $token = auth()->claims(['name' => 'sajedul'])->attempt($credentials)) {
+
             return response()->json(['error' => 'Email or Password Invalid'], 401);
         }
 
@@ -80,6 +81,12 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+
+    public function payload()
+    {
+        return auth()->payload();
     }
 }
 
