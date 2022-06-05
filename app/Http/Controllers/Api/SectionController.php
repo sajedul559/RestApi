@@ -50,7 +50,7 @@ class SectionController extends Controller
         return response()->json($section);
     }
 
-    
+
     /**
      * Update the specified resource in storage.
      *
